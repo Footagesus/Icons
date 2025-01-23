@@ -1,8 +1,8 @@
 
--- https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/Main.lua
+-- https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua
 
 local Icons = {
-    ["lucide"] = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/Main.lua"))()
+    ["lucide"] = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))()
     
     
     -- More soon 
