@@ -2,7 +2,7 @@
 -- https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua
 
 local Icons = {
-    ["lucide"] = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))()
+    ["lucide"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))()
     
     
     -- More soon 
@@ -19,7 +19,7 @@ function IconModule.SetIconsType(iconType)
 end
 
 function IconModule.Icon(Icon, Type) -- Type: optional
-    local iconType = Icons[Type or IconsType]
+    local iconType = Icons[Type or IconModule.IconsType]
     
     if iconType.Icons[Icon] then
         return { iconType.Spritesheets[tostring(iconType.Icons[Icon].Image)], iconType.Icons[Icon] }
