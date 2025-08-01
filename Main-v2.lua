@@ -16,6 +16,18 @@ local IconModule = {
     IconThemeTag = nil,
 }
 
+local function parseIconString(iconString)
+    if type(iconString) == "string" then
+        local splitIndex = iconString:find(":")
+        if splitIndex then
+            local iconType = iconString:sub(1, splitIndex - 1)
+            local iconName = iconString:sub(splitIndex + 1)
+            return iconType, iconName
+        end
+    end
+    return nil, iconString
+end
+
 function IconModule.SetIconsType(iconType)
     IconModule.IconsType = iconType
 end
@@ -27,19 +39,24 @@ function IconModule.Init(New, IconThemeTag)
     return IconModule
 end
 
-function IconModule.Icon(Icon, Type) -- Type: optional
-    local iconType = Icons[Type or IconModule.IconsType]
+function IconModule.Icon(Icon, Type)
+    local iconType, iconName = parseIconString(Icon)
     
-    if iconType.Icons[Icon] then
+    local targetType = iconType or Type or IconModule.IconsType
+    local targetName = iconName
+    
+    local iconSet = Icons[targetType]
+    
+    if iconSet and iconSet.Icons[targetName] then
         return { 
-            iconType.Spritesheets[tostring(iconType.Icons[Icon].Image)], 
-            iconType.Icons[Icon], -- ImageRectSize, ImageRectPosition, ?Parts
+            iconSet.Spritesheets[tostring(iconSet.Icons[targetName].Image)], 
+            iconSet.Icons[targetName], -- ImageRectSize, ImageRectPosition, ?Parts
         }
     end
     return nil
 end
 
-function IconModule.Image(IconConfig) -- Type: optional
+function IconModule.Image(IconConfig)
     local Icon = {
         Icon = IconConfig.Icon or nil,
         Type = IconConfig.Type,
