@@ -69,9 +69,10 @@ local folderIcon = Icons.Image({
     -- Icon with 2 Colors
     Icon = "geist:accessibility-unread", -- Using Geist Icon
     Colors = {
-        "Icon", -- ↑ Primary 'theme tag' color
+        "Icon", -- Primary 'theme tag' color
         Color3.fromHex("#315dff") -- Secondary 'Color3' color 
     }, -- Theme tags or Color3 values
+    
     Size = UDim2.new(0, 28, 0, 28)
 })
 
