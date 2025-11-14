@@ -104,7 +104,8 @@ function IconModule.Icon(Icon, Type, DefaultFormat)
             iconSet.Icons[targetName],  
         }  
     elseif iconSet and iconSet[targetName] and string.find(iconSet[targetName], "rbxassetid://") then
-        return DefaultFormat and { iconSet[targetName], { ImageRectSize = Vector2.new(0,0), ImageRectPosition = Vector2.new(0,0) } } or iconSet[targetName]
+        return DefaultFormat and iconSet[targetName], { ImageRectSize = Vector2.new(0,0), ImageRectPosition = Vector2.new(0,0) }
+            or iconSet[targetName]
     end  
     return nil  
 end  
