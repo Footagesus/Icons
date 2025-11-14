@@ -90,7 +90,7 @@ function IconModule.Init(New, IconThemeTag)
     return IconModule  
 end  
   
-function IconModule.Icon(Icon, Type)  
+function IconModule.Icon(Icon, Type, DefaultFormat)  
     local iconType, iconName = parseIconString(Icon)  
       
     local targetType = iconType or Type or IconModule.IconsType  
@@ -104,7 +104,7 @@ function IconModule.Icon(Icon, Type)
             iconSet.Icons[targetName],  
         }  
     elseif iconSet and iconSet[targetName] and string.find(iconSet[targetName], "rbxassetid://") then
-        return iconSet[targetName]
+        return DefaultFormat and { Image = iconSet[targetName], ImageRectSize = Vector2.new(0,0), ImageRectPosition = Vector2.new(0,0) } or iconSet[targetName]
     end  
     return nil  
 end  
