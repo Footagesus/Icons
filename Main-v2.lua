@@ -98,11 +98,13 @@ function IconModule.Icon(Icon, Type)
       
     local iconSet = IconModule.Icons[targetType]  
       
-    if iconSet and iconSet.Icons[targetName] then  
+    if iconSet and iconSet.Icons and iconSet.Icons[targetName] then  
         return {   
             iconSet.Spritesheets[tostring(iconSet.Icons[targetName].Image)],   
             iconSet.Icons[targetName],  
         }  
+    elseif iconSet and iconSet[targetName] and string.find(iconSet[targetName], "rbxassetid://") then
+        return iconSet[targetName]
     end  
     return nil  
 end  
@@ -127,7 +129,8 @@ function IconModule.Image(IconConfig)
     end  
       
     local IconLabel = IconModule.Icon(Icon.Icon, Icon.Type)  
-      
+    local isrbxassetid = typeof(IconLabel) == "string" and string.find(IconLabel, 'rbxassetid://')
+    
     if IconModule.New then  
         local New = IconModule.New  
           
@@ -140,13 +143,13 @@ function IconModule.Image(IconConfig)
             ThemeTag = Colors[1].ThemeTag and {  
                 ImageColor3 = Colors[1].ThemeTag  
             },  
-            Image = IconLabel[1],  
-            ImageRectSize = IconLabel[2].ImageRectSize,  
-            ImageRectOffset = IconLabel[2].ImageRectPosition,  
+            Image = isrbxassetid and IconLabel or IconLabel[1],  
+            ImageRectSize = isrbxassetid and nil or IconLabel[2].ImageRectSize,  
+            ImageRectOffset = isrbxassetid and nil or IconLabel[2].ImageRectPosition,  
         })  
       
       
-        if IconLabel[2].Parts then  
+        if not isrbxassetid and IconLabel[2].Parts then  
             for _, part in next, IconLabel[2].Parts do  
                 local IconPartLabel = IconModule.Icon(part, Icon.Type)  
                   
@@ -171,12 +174,12 @@ function IconModule.Image(IconConfig)
         IconFrame.Size = Icon.Size  
         IconFrame.BackgroundTransparency = 1  
         IconFrame.ImageColor3 = Colors[1].Color  
-        IconFrame.Image = IconLabel[1]  
-        IconFrame.ImageRectSize = IconLabel[2].ImageRectSize  
-        IconFrame.ImageRectOffset = IconLabel[2].ImageRectPosition  
+        IconFrame.Image = isrbxassetid and IconLabel or IconLabel[1]  
+        IconFrame.ImageRectSize = isrbxassetid and nil or IconLabel[2].ImageRectSize  
+        IconFrame.ImageRectOffset = isrbxassetid and nil or IconLabel[2].ImageRectPosition  
           
           
-        if IconLabel[2].Parts then  
+        if not isrbxassetid and IconLabel[2].Parts then  
             for _, part in next, IconLabel[2].Parts do  
                 local IconPartLabel = IconModule.Icon(part, Icon.Type)  
                   
