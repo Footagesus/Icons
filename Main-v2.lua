@@ -138,7 +138,7 @@ function IconModule.Image(IconConfig)
         }  
     end  
       
-    local IconLabel = IconModule.Icon(Icon.Icon, Icon.Type)  
+    local IconLabel = IconModule.Icon2(Icon.Icon, Icon.Type)  
     local isrbxassetid = typeof(IconLabel) == "string" and string.find(IconLabel, 'rbxassetid://')
     
     if IconModule.New then  
