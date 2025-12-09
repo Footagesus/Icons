@@ -86,4 +86,6 @@ folderIcon.IconFrame.Parent = ScreenGui -- ... Parent to your UI
 ### Available Icons (Credits)
 - [Lucide Icons](https://github.com/lucide-icons/lucide)
 - [Craft Icons](https://www.figma.com/community/file/1415718327120418204)
-- [Geist Icons](https://vercel.com/geist/icons)(v2)
+- [Geist Icons](https://vercel.com/geist/icons)
+- [Solar Icons](https://icones.js.org/collection/solar)
+- [SF Symbols](https://sf-symbols-one.vercel.app/)
