@@ -8,6 +8,7 @@ local IconModule = {
       
     Icons = {  
         ["lucide"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))(),  
+        ["solar"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua"))(),  
         ["craft"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua"))(),  
         ["geist"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua"))(),  
         ["sfsymbols"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua"))(),  
@@ -90,7 +91,7 @@ function IconModule.Init(New, IconThemeTag)
       
     return IconModule  
 end  
-  
+
 function IconModule.Icon(Icon, Type, DefaultFormat)  
     local iconType, iconName = parseIconString(Icon)  
       
@@ -105,12 +106,17 @@ function IconModule.Icon(Icon, Type, DefaultFormat)
             iconSet.Icons[targetName],  
         }  
     elseif iconSet and iconSet[targetName] and string.find(iconSet[targetName], "rbxassetid://") then
-        return { 
+        return DefaultFormat and { 
             iconSet[targetName], 
             { ImageRectSize = Vector2.new(0,0), ImageRectPosition = Vector2.new(0,0) }
-        }
+        } or iconSet[targetName]
     end  
     return nil  
+end  
+  
+
+function IconModule.Icon2(Icon, Type, DefaultFormat)  
+    return IconModule.Icon(Icon, Type, true)  
 end  
   
 function IconModule.Image(IconConfig)  
