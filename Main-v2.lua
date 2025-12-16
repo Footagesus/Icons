@@ -92,9 +92,10 @@ function IconModule.Init(New, IconThemeTag)
     return IconModule  
 end  
 
-function IconModule.Icon(Icon, Type, DefaultFormat)  
+function IconModule.Icon(Icon, Type, DefaultFormat)
+    DefaultFormat = DefaultFormat ~= false
     local iconType, iconName = parseIconString(Icon)  
-      
+    
     local targetType = iconType or Type or IconModule.IconsType  
     local targetName = iconName  
       
@@ -112,6 +113,10 @@ function IconModule.Icon(Icon, Type, DefaultFormat)
         } or iconSet[targetName]
     end  
     return nil  
+end  
+
+function IconModule.GetIcon(Icon, Type)  
+    return IconModule.Icon(Icon, Type, false) 
 end  
   
 
