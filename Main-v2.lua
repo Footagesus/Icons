@@ -1,5 +1,9 @@
 -- This is a new version   
-  
+
+local cloneref = (cloneref or clonereference or function(instance) return instance end)
+
+local RunService = cloneref(game:GetService("RunService"))
+
 local IconModule = {  
     IconsType = "lucide",  
       
@@ -7,12 +11,27 @@ local IconModule = {
     IconThemeTag = nil,  
       
     Icons = {  
-        ["lucide"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))(),  
-        ["solar"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua"))(),  
-        ["craft"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua"))(),  
-        ["geist"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua"))(),  
-        ["sfsymbols"] = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua"))(),  
-    },
+        ["lucide"] = loadstring(
+            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua") 
+            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))
+        )(),  
+        ["solar"] = loadstring(
+            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua") 
+            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua"))
+        )(),  
+        ["craft"] = loadstring(
+            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua") 
+            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua"))
+        )(),  
+        ["geist"] = loadstring(
+            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua") 
+            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua"))
+        )(),  
+        ["sfsymbols"] = loadstring(
+            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua") 
+            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua"))
+        )(),  
+    }
 }  
   
 local function parseIconString(iconString)  
@@ -92,9 +111,10 @@ function IconModule.Init(New, IconThemeTag)
     return IconModule  
 end  
 
-function IconModule.Icon(Icon, Type, DefaultFormat)  
+function IconModule.Icon(Icon, Type, DefaultFormat)
+    DefaultFormat = DefaultFormat ~= false
     local iconType, iconName = parseIconString(Icon)  
-      
+    
     local targetType = iconType or Type or IconModule.IconsType  
     local targetName = iconName  
       
@@ -112,6 +132,10 @@ function IconModule.Icon(Icon, Type, DefaultFormat)
         } or iconSet[targetName]
     end  
     return nil  
+end  
+
+function IconModule.GetIcon(Icon, Type)  
+    return IconModule.Icon(Icon, Type, false) 
 end  
   
 

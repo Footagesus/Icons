@@ -3,27 +3,26 @@
 
 ## Use Icons in your project!
 
-### Version 1
+### Version 1 & 2
 ```lua
 -- Load icons
-local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua"))()
+local IconsV1 = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua"))()
+local IconsV2 = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua"))()
 
--- Set Icons Type
-Icons.SetIconsType("lucide") -- lucide, craft and more...
+-- Set Icons Type (default is lucide)
+IconsV2.SetIconsType("lucide") -- lucide, craft and more...
 
 -- Use Icons
-local HouseIcon = Icons.Icon("house")
+local HouseIcon = IconsV2.GetIcon("house")
 
 local ImageLabel = Instance.new("ImageLabel")
-ImageLabel.Image = HouseIcon[1]
-ImageLabel.ImageRectSize = HouseIcon[2].ImageRectSize
-ImageLabel.ImageRectOffset = HouseIcon[2].ImageRectPosition
+ImageLabel.Image = HouseIcon
 ```
 
 
 ### Version 2 (Beta)
 
-#### Default
+#### With `Image()` function
 ```lua
 -- Load Icons
 local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua"))()
