@@ -3,7 +3,7 @@
 local cloneref = (cloneref or clonereference or function(instance) return instance end)
 
 local RunService = cloneref(game:GetService("RunService"))
-local HttpServer = cloneref(game:GetService("HttpServer"))
+local HttpService = cloneref(game:GetService("HttpService"))
 
 local IconModule = {  
     IconsType = "lucide",  
