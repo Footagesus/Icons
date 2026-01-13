@@ -5,6 +5,15 @@ local cloneref = (cloneref or clonereference or function(instance) return instan
 local RunService = cloneref(game:GetService("RunService"))
 local HttpService = cloneref(game:GetService("HttpService"))
 
+local function Get(url)
+    if writefile and game.HttpGet then
+        return game:HttpGet(url)
+    else
+        return HttpService:GetAsync(url)
+    end
+end
+
+
 local IconModule = {  
     IconsType = "lucide",  
       
@@ -12,26 +21,11 @@ local IconModule = {
     IconThemeTag = nil,  
       
     Icons = {  
-        ["lucide"] = loadstring(
-            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua") 
-            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))
-        )(),  
-        ["solar"] = loadstring(
-            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua") 
-            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua"))
-        )(),  
-        ["craft"] = loadstring(
-            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua") 
-            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua"))
-        )(),  
-        ["geist"] = loadstring(
-            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua") 
-            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua"))
-        )(),  
-        ["sfsymbols"] = loadstring(
-            RunService:IsStudio() and HttpService:GetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua") 
-            or (game.HttpGetAsync and game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua"))
-        )(),  
+        lucide = loadstring(Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua"))(),
+        solar = loadstring(Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua"))(),
+        craft = loadstring(Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua"))(),
+        geist = loadstring(Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua"))(),
+        sfsymbols = loadstring(Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua"))(),
     }
 }  
   
