@@ -1,28 +1,33 @@
 # Icons
 
-
 ## Use Icons in your project!
 
-### Version 1 & 2
+### Get "rbxassetid://..."
+
 ```lua
 -- Load icons
-local IconsV1 = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua"))()
 local IconsV2 = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua"))()
 
--- Set Icons Type (default is lucide)
+-- optional. Set Icons Type (default is lucide)
 IconsV2.SetIconsType("lucide") -- lucide, craft and more...
 
 -- Use Icons
-local HouseIcon = IconsV2.GetIcon("house")
+local HouseIcon = IconsV2.GetIcon("house") -- default is lucide
 
 local ImageLabel = Instance.new("ImageLabel")
 ImageLabel.Image = HouseIcon
-```
 
+local SFSymbolsHouseFill = IconsV2.GetIcon("sfsymbols:HouseFill") -- get sf-symbol icon
+
+local ImageLabel2 = Instance.new("ImageLabel")
+ImageLabel2.Image = SFSymbolsHouseFill
+ImageLabel2.ImageColor3 = Color3.fromHex("#30ff6a") -- set color
+```
 
 ### Version 2 (Beta)
 
 #### With `Image()` function
+
 ```lua
 -- Load Icons
 local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua"))()
@@ -45,6 +50,7 @@ local houseIcon = Icons.Image({
 ```
 
 #### With WindUI `Creator` module (Themes support)
+
 ```lua
 -- Load Icons
 local Icons = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua"))()
@@ -69,9 +75,9 @@ local folderIcon = Icons.Image({
     Icon = "geist:accessibility-unread", -- Using Geist Icon
     Colors = {
         "Icon", -- Primary 'theme tag' color
-        Color3.fromHex("#315dff") -- Secondary 'Color3' color 
+        Color3.fromHex("#315dff") -- Secondary 'Color3' color
     }, -- Theme tags or Color3 values
-    
+
     Size = UDim2.new(0, 28, 0, 28)
 })
 
@@ -80,11 +86,11 @@ houseIcon.IconFrame.Parent = ScreenGui -- ... Parent to your UI
 folderIcon.IconFrame.Parent = ScreenGui -- ... Parent to your UI
 ```
 
-
-
 ### Available Icons (Credits)
+
 - [Lucide Icons](https://github.com/lucide-icons/lucide)
 - [Craft Icons](https://www.figma.com/community/file/1415718327120418204)
 - [Geist Icons](https://vercel.com/geist/icons)
 - [Solar Icons](https://icones.js.org/collection/solar)
 - [SF Symbols](https://sf-symbols-one.vercel.app/)
+- [Gravity UI Icons](https://gravity-ui.com/ru/icons)
