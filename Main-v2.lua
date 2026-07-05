@@ -20,7 +20,6 @@ local function Get(url)
 		else
 			return ReplicatedStorage:WaitForChild("Request"):InvokeServer({ Url = url })
 		end
-		return HttpService:GetAsync(url)
 	end
 end
 
