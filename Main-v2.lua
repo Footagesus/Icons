@@ -6,11 +6,20 @@ end)
 
 local RunService = cloneref(game:GetService("RunService"))
 local HttpService = cloneref(game:GetService("HttpService"))
+local ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
 
 local function Get(url)
 	if writefile and game.HttpGet then
 		return game:HttpGet(url)
 	else
+		local Success, Result = pcall(function()
+			return HttpService:GetAsync(url)
+		end)
+		if Success then
+			return Result
+		else
+			return ReplicatedStorage:WaitForChild("Request"):InvokeServer({ Url = url })
+		end
 		return HttpService:GetAsync(url)
 	end
 end
