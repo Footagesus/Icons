@@ -18,9 +18,24 @@ local function Get(url)
 		if Success then
 			return Result
 		else
-			return ReplicatedStorage:WaitForChild("Request"):InvokeServer({ Url = url })
+			return ReplicatedStorage:WaitForChild("Request", 9999):InvokeServer({ Url = url })
 		end
 	end
+end
+
+local function Loadstring(src)
+	if ReplicatedStorage:WaitForChild("Loadstring", 9999) then
+		return function()
+			return ReplicatedStorage:WaitForChild("Loadstring", 9999):InvokeServer(src)
+		end
+	end
+	return function()
+		return {}
+	end
+end
+
+local function IsExploit()
+	return request and true or false
 end
 
 local IconModule = {
@@ -30,24 +45,24 @@ local IconModule = {
 	IconThemeTag = nil,
 
 	Icons = {
-		lucide = loadstring(
+		lucide = IsExploit() and Loadstring(
 			Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/lucide/dist/Icons.lua")
-		)(),
-		solar = loadstring(
+		)() or require("./lucide/dist/Icons"),
+		solar = IsExploit() and Loadstring(
 			Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/solar/dist/Icons.lua")
-		)(),
-		craft = loadstring(
+		)() or require("./solar/dist/Icons"),
+		craft = IsExploit() and Loadstring(
 			Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/craft/dist/Icons.lua")
-		)(),
-		geist = loadstring(
+		)() or require("./craft/dist/Icons"),
+		geist = IsExploit() and Loadstring(
 			Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/geist/dist/Icons.lua")
-		)(),
-		sfsymbols = loadstring(
+		)() or require("./geist/dist/Icons"),
+		sfsymbols = IsExploit() and Loadstring(
 			Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/sfsymbols/dist/Icons.lua")
-		)(),
-		gravity = loadstring(
+		)() or require("./sfsymbols/dist/Icons"),
+		gravity = IsExploit() and Loadstring(
 			Get("https://raw.githubusercontent.com/Footagesus/Icons/refs/heads/main/gravity/dist/Icons.lua")
-		)(),
+		)() or require("./gravity/dist/Icons"),
 	},
 }
 
