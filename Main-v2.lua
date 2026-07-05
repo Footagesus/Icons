@@ -8,8 +8,12 @@ local RunService = cloneref(game:GetService("RunService"))
 local HttpService = cloneref(game:GetService("HttpService"))
 local ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
 
+local function IsExploit()
+	return request and true or false
+end
+
 local function Get(url)
-	if writefile and game.HttpGet then
+	if IsExploit() then
 		return game:HttpGet(url)
 	else
 		local Success, Result = pcall(function()
@@ -24,18 +28,13 @@ local function Get(url)
 end
 
 local function Loadstring(src)
-	if ReplicatedStorage:WaitForChild("Loadstring", 9999) then
+	if not IsExploit() and ReplicatedStorage:WaitForChild("Loadstring", 9999) then
 		return function()
 			return ReplicatedStorage:WaitForChild("Loadstring", 9999):InvokeServer(src)
 		end
+	else
+		return loadstring(src)
 	end
-	return function()
-		return {}
-	end
-end
-
-local function IsExploit()
-	return request and true or false
 end
 
 local IconModule = {
